@@ -194,9 +194,8 @@ This project provides a set of microservices to interact with a Qdrant vector da
   {
     "status": "success",
     "uuids": [
-      "uuid_1",
-      "uuid_2",
-      "uuid_3"
+     "a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041",
+     "c2779b76-8418-4d91-bb42-cf47fb5bb6da"
     ]
   }
   ```
