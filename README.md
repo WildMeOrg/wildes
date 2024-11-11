@@ -57,11 +57,11 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Description**: Authenticates a user and returns a long-term token.
 - **Body**:
   ```json
-  {
-    "username": "test_user",
-    "OTP_Token": "123456",
-    "long_term_days": 30
-  }
+{
+  "username": "wildme_ess",
+  "OTP_Token": "XXXXXX",
+  "long_term_days": 300
+}
   ```
 - **Response**:
   ```json
@@ -72,7 +72,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
   ```
 
 ### 2. Get Embedding by Image URLs
-- **Endpoint**: `/GetEmbeddingByImagingURL`
+- **Endpoint**: `/GetEmbeddingByImageURL`
 - **Method**: `POST`
 - **Description**: Retrieves embeddings for the provided image URLs.
 - **Body**:
@@ -82,7 +82,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
       "https://example.com/image1.jpg",
       "https://example.com/image2.jpg"
     ],
-    "algorithm": "miewid_2048"
+    "algorithm": "miewid_2152"
   }
   ```
 - **Response**:
@@ -119,7 +119,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
         }
       }
     ],
-    "algorithm": "example_1024"
+    "algorithm": "miewid_2152"
   }
   ```
 
@@ -148,7 +148,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
         }
       }
     ],
-    "algorithm": "example_1024"
+    "algorithm": "miewid_2152"
   }
   ```
 - **Response**:
@@ -176,7 +176,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Body**:
   ```json
   {
-    "collection_name": "example_1024",
+    "collection_name": "miewid_2152",
     "query_vector": [0.1, 0.2, 0.3, 0.4, 0.5],
     "top_k": 5
   }
@@ -218,11 +218,11 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-## Running Tests
-The repository includes unit tests that can be run to validate functionality. To execute the tests:
+## Running The services
+To run the service
 
 ```sh
-pytest
+nohup python3.10 -m uvicorn main:app --host 0.0.0.0 --port 6444 --reload &
 ```
 
 
