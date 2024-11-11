@@ -2,6 +2,9 @@
 
 This project provides a set of microservices to interact with a Qdrant vector database. These services allow users to generate embeddings using a variety of algorithms, store them in Qdrant, and perform various operations such as retrieving, searching, and upserting embedding vectors.
 
+![image](https://github.com/user-attachments/assets/50535dcd-9cd1-4ec4-bb98-2688230e5e0c)
+
+
 ## Features
 - **Generate Embeddings from Image URLs**: Generate embeddings from provided image URLs using a specified algorithm.
 - **Store Embeddings in Qdrant**: Upsert generated embeddings into the Qdrant vector database.
