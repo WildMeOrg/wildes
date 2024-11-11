@@ -2,6 +2,9 @@
 
 This project provides a set of microservices to interact with a Qdrant vector database. These services allow users to generate embeddings using a variety of algorithms, store them in Qdrant, and perform various operations such as retrieving, searching, and upserting embedding vectors.
 
+![image](https://github.com/user-attachments/assets/50535dcd-9cd1-4ec4-bb98-2688230e5e0c)
+
+
 ## Features
 - **Generate Embeddings from Image URLs**: Generate embeddings from provided image URLs using a specified algorithm.
 - **Store Embeddings in Qdrant**: Upsert generated embeddings into the Qdrant vector database.
@@ -25,7 +28,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 1. **Clone the Repository**
    ```sh
    git clone https://github.com/wildme/wildes.git
-   cd qdrant-microservices-api
+   cd wildes
    ```
 
 2. **Install Dependencies**
@@ -57,11 +60,11 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Description**: Authenticates a user and returns a long-term token.
 - **Body**:
   ```json
-  {
-    "username": "test_user",
-    "OTP_Token": "123456",
-    "long_term_days": 30
-  }
+   {
+     "username": "wildme_ess",
+     "OTP_Token": "XXXXXX",
+     "long_term_days": 300
+   }
   ```
 - **Response**:
   ```json
@@ -72,9 +75,16 @@ This project provides a set of microservices to interact with a Qdrant vector da
   ```
 
 ### 2. Get Embedding by Image URLs
-- **Endpoint**: `/GetEmbeddingByImagingURL`
+- **Endpoint**: `/GetEmbeddingByImageURL`
 - **Method**: `POST`
-- **Description**: Retrieves embeddings for the provided image URLs.
+- **Description**: Retrieves embeddings for the provided image URLs (But does not Read/Write from Qdrant ).
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
   {
@@ -82,7 +92,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
       "https://example.com/image1.jpg",
       "https://example.com/image2.jpg"
     ],
-    "algorithm": "miewid_2048"
+    "algorithm": "miewid_2152"
   }
   ```
 - **Response**:
@@ -105,7 +115,14 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 3. Post Embedding
 - **Endpoint**: `/PostEmbedding`
 - **Method**: `POST`
-- **Description**: Stores the given embeddings in the Qdrant database.
+- **Description**: Stores the given embeddings and uuid in the Qdrant database.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
   {
@@ -119,64 +136,64 @@ This project provides a set of microservices to interact with a Qdrant vector da
         }
       }
     ],
-    "algorithm": "example_1024"
+    "algorithm": "miewid_2152"
   }
   ```
 
-### 4. Batch Post Embedding
-- **Endpoint**: `/BatchPostEmbedding`
+### 4. GenerateAndPostEmbeddingByImageURL Embedding
+- **Endpoint**: `/GenerateAndPostEmbeddingByImageURL`
 - **Method**: `POST`
-- **Description**: Inserts a batch of embeddings into the Qdrant database.
+- **Description**: For the given the list of image_urls, generate embeddings, store the given embeddings in the Qdrant database.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````  
 - **Body**:
   ```json
-  {
-    "embeddings": [
-      {
-        "uuid": "uuid_1",
-        "vector": [0.1, 0.2, 0.3],
-        "metadata": {
-          "source": "web",
-          "category": "nature"
-        }
-      },
-      {
-        "uuid": "uuid_2",
-        "vector": [0.4, 0.5, 0.6],
-        "metadata": {
-          "source": "mobile",
-          "category": "urban"
-        }
-      }
-    ],
-    "algorithm": "example_1024"
-  }
+    {
+       "image_urls": ["/data/db/wess/chim_image.jpg", "/data/db/wess/chim_image.jpg" ], 
+       "uuids":["570c774b-935a-4f67-83f2-57c214a341e7","c2779b76-8418-4d91-bb42-cf47fb5bb6db"],
+       "algorithm": "miewid_2152"
+   }
   ```
 - **Response**:
   ```json
-  {
-    "status": "success",
-    "message": "Embeddings posted successfully",
-    "result": [
-      {
-        "uuid": "uuid_1",
-        "status": "success"
-      },
-      {
-        "uuid": "uuid_2",
-        "status": "success"
-      }
-    ]
-  }
+   {
+     "status": "success",
+     "message": "Embeddings generated and posted successfully",
+     "result": [
+       {
+         "uuid": "570c774b-935a-4f67-83f2-57c214a341e7",
+         "image_url": "/data/db/wess/chim_image.jpg",
+         "status": "success"
+       },
+       {
+         "uuid": "c2779b76-8418-4d91-bb42-cf47fb5bb6db",
+         "image_url": "/data/db/wess/chim_image.jpg",
+         "status": "success"
+       }
+     ]
+   }
   ```
-
-### 5. Search Embedding
-- **Endpoint**: `/SearchEmbedding`
+  
+### 5. Search By Embedding
+- **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
 - **Description**: Searches the Qdrant database for similar embeddings to the given query vector.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
   {
-    "collection_name": "example_1024",
+    "algorithm": "miewid_2152",
     "query_vector": [0.1, 0.2, 0.3, 0.4, 0.5],
     "top_k": 5
   }
@@ -201,11 +218,23 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-### 6. Get UUIDs
+### 6. Get UUIDs All
 - **Endpoint**: `/GetUUIDs`
-- **Method**: `GET`
+- **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
-- **Parameters**: `collection_name` (query parameter)
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
+- **Body**:
+  ```json
+    {
+         "algorithm": "miewid_2152"
+    }
+  ```
 - **Response**:
   ```json
   {
@@ -218,11 +247,41 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-## Running Tests
-The repository includes unit tests that can be run to validate functionality. To execute the tests:
+
+### 7. Get UUIDs
+- **Endpoint**: `/GetUUIDs`
+- **Method**: `POST`
+- **Description**: Retrieves UUIDs for the given list of UUIDs the specified Qdrant collection.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
+- **Body**:
+  ```json
+   {
+       "uuids":["a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041","c2779b76-8418-4d91-bb42-cf47fb5bb6da"],
+       "algorithm": "miewid_2152"
+   }
+  ```
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "uuids": [
+     "a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041",
+     "c2779b76-8418-4d91-bb42-cf47fb5bb6da"
+    ]
+  }
+  ```
+
+## Running The services
+To run the service
 
 ```sh
-pytest
+nohup python3.10 -m uvicorn main:app --host 0.0.0.0 --port 6444 --reload &
 ```
 
 
