@@ -155,7 +155,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
    }
   ```
   
-### 4. Search Embedding
+### 5. Search By Embedding
 - **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
 - **Description**: Searches the Qdrant database for similar embeddings to the given query vector.
@@ -187,7 +187,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-### 5. Get UUIDs All
+### 6. Get UUIDs All
 - **Endpoint**: `/GetUUIDs`
 - **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
@@ -210,7 +210,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
   ```
 
 
-### 5. Get UUIDs
+### 7. Get UUIDs
 - **Endpoint**: `/GetUUIDs`
 - **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
