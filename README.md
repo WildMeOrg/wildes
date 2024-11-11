@@ -25,7 +25,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 1. **Clone the Repository**
    ```sh
    git clone https://github.com/wildme/wildes.git
-   cd qdrant-microservices-api
+   cd wildes
    ```
 
 2. **Install Dependencies**
@@ -170,7 +170,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
   ```
 
 ### 5. Search Embedding
-- **Endpoint**: `/SearchEmbedding`
+- **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
 - **Description**: Searches the Qdrant database for similar embeddings to the given query vector.
 - **Body**:
