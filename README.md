@@ -74,7 +74,14 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 2. Get Embedding by Image URLs
 - **Endpoint**: `/GetEmbeddingByImageURL`
 - **Method**: `POST`
-- **Description**: Retrieves embeddings for the provided image URLs.
+- **Description**: Retrieves embeddings for the provided image URLs (But does not Read/Write from Qdrant ).
+- **Headers**:
+  ```json
+     {
+     x-long-term-token: e8d6f184-c839-4822-bae4-4542fa50a1d4
+     Content-Type: application/json
+     }
+  ````
 - **Body**:
   ```json
   {
@@ -105,7 +112,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 3. Post Embedding
 - **Endpoint**: `/PostEmbedding`
 - **Method**: `POST`
-- **Description**: Stores the given embeddings in the Qdrant database.
+- **Description**: Stores the given embeddings and uuid in the Qdrant database.
 - **Body**:
   ```json
   {
@@ -126,7 +133,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 4. GenerateAndPostEmbeddingByImageURL Embedding
 - **Endpoint**: `/GenerateAndPostEmbeddingByImageURL`
 - **Method**: `POST`
-- **Description**: Stores the given embeddings in the Qdrant database.
+- **Description**: For the given image_url, generate embeddings, store the given embeddings in the Qdrant database.
 - **Body**:
   ```json
     {
