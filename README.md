@@ -78,8 +78,8 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Headers**:
   ```json
      {
-     x-long-term-token: e8d6f184-c839-4822-bae4-4542fa50a1d4
-     Content-Type: application/json
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
      }
   ````
 - **Body**:
@@ -113,6 +113,13 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Endpoint**: `/PostEmbedding`
 - **Method**: `POST`
 - **Description**: Stores the given embeddings and uuid in the Qdrant database.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
   {
@@ -133,7 +140,14 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 4. GenerateAndPostEmbeddingByImageURL Embedding
 - **Endpoint**: `/GenerateAndPostEmbeddingByImageURL`
 - **Method**: `POST`
-- **Description**: For the given image_url, generate embeddings, store the given embeddings in the Qdrant database.
+- **Description**: For the given the list of image_urls, generate embeddings, store the given embeddings in the Qdrant database.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````  
 - **Body**:
   ```json
     {
@@ -166,6 +180,13 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
 - **Description**: Searches the Qdrant database for similar embeddings to the given query vector.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
   {
@@ -198,6 +219,13 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Endpoint**: `/GetUUIDs`
 - **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
     {
@@ -220,7 +248,14 @@ This project provides a set of microservices to interact with a Qdrant vector da
 ### 7. Get UUIDs
 - **Endpoint**: `/GetUUIDs`
 - **Method**: `POST`
-- **Description**: Retrieves all UUIDs from the specified Qdrant collection.
+- **Description**: Retrieves UUIDs for the given list of UUIDs the specified Qdrant collection.
+- **Headers**:
+  ```json
+     {
+     "x-long-term-token": "e8d6f184-c839-4822-bae4-4542fa50a1d4",
+     "Content-Type": "application/json"
+     }
+  ````
 - **Body**:
   ```json
    {
