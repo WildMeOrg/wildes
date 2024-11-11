@@ -123,6 +123,38 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
+### 4. GenerateAndPostEmbeddingByImageURL Embedding
+- **Endpoint**: `/GenerateAndPostEmbeddingByImageURL`
+- **Method**: `POST`
+- **Description**: Stores the given embeddings in the Qdrant database.
+- **Body**:
+  ```json
+    {
+       "image_urls": ["/data/db/wess/chim_image.jpg", "/data/db/wess/chim_image.jpg" ], 
+       "uuids":["570c774b-935a-4f67-83f2-57c214a341e7","c2779b76-8418-4d91-bb42-cf47fb5bb6db"],
+       "algorithm": "miewid_2152"
+   }
+  ```
+- **Response**:
+  ```json
+   {
+     "status": "success",
+     "message": "Embeddings generated and posted successfully",
+     "result": [
+       {
+         "uuid": "570c774b-935a-4f67-83f2-57c214a341e7",
+         "image_url": "/data/db/wess/chim_image.jpg",
+         "status": "success"
+       },
+       {
+         "uuid": "c2779b76-8418-4d91-bb42-cf47fb5bb6db",
+         "image_url": "/data/db/wess/chim_image.jpg",
+         "status": "success"
+       }
+     ]
+   }
+  ```
+  
 ### 4. Search Embedding
 - **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
