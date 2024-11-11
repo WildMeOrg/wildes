@@ -157,9 +157,14 @@ This project provides a set of microservices to interact with a Qdrant vector da
 
 ### 5. Get UUIDs All
 - **Endpoint**: `/GetUUIDs`
-- **Method**: `GET`
+- **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
-- **Parameters**: `algorithm` (query parameter)
+- **Body**:
+  ```json
+ {
+      "algorithm": "miewid_2152"
+ }
+  ```
 - **Response**:
   ```json
   {
@@ -175,9 +180,15 @@ This project provides a set of microservices to interact with a Qdrant vector da
 
 ### 5. Get UUIDs
 - **Endpoint**: `/GetUUIDs`
-- **Method**: `GET`
+- **Method**: `POST`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
-- **Parameters**: `collection_name` (query parameter)
+- **Body**:
+  ```json
+{
+    "uuids":["a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041","c2779b76-8418-4d91-bb42-cf47fb5bb6da"],
+    "algorithm": "miewid_2152"
+}
+  ```
 - **Response**:
   ```json
   {
