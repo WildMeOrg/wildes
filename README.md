@@ -123,53 +123,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-### 4. Batch Post Embedding
-- **Endpoint**: `/BatchPostEmbedding`
-- **Method**: `POST`
-- **Description**: Inserts a batch of embeddings into the Qdrant database.
-- **Body**:
-  ```json
-  {
-    "embeddings": [
-      {
-        "uuid": "uuid_1",
-        "vector": [0.1, 0.2, 0.3],
-        "metadata": {
-          "source": "web",
-          "category": "nature"
-        }
-      },
-      {
-        "uuid": "uuid_2",
-        "vector": [0.4, 0.5, 0.6],
-        "metadata": {
-          "source": "mobile",
-          "category": "urban"
-        }
-      }
-    ],
-    "algorithm": "miewid_2152"
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "status": "success",
-    "message": "Embeddings posted successfully",
-    "result": [
-      {
-        "uuid": "uuid_1",
-        "status": "success"
-      },
-      {
-        "uuid": "uuid_2",
-        "status": "success"
-      }
-    ]
-  }
-  ```
-
-### 5. Search Embedding
+### 4. Search Embedding
 - **Endpoint**: `/SearchByEmbedding`
 - **Method**: `POST`
 - **Description**: Searches the Qdrant database for similar embeddings to the given query vector.
@@ -201,7 +155,25 @@ This project provides a set of microservices to interact with a Qdrant vector da
   }
   ```
 
-### 6. Get UUIDs
+### 5. Get UUIDs All
+- **Endpoint**: `/GetUUIDs`
+- **Method**: `GET`
+- **Description**: Retrieves all UUIDs from the specified Qdrant collection.
+- **Parameters**: `algorithm` (query parameter)
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "uuids": [
+      "uuid_1",
+      "uuid_2",
+      "uuid_3"
+    ]
+  }
+  ```
+
+
+### 5. Get UUIDs
 - **Endpoint**: `/GetUUIDs`
 - **Method**: `GET`
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
