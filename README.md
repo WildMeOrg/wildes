@@ -57,11 +57,11 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Description**: Authenticates a user and returns a long-term token.
 - **Body**:
   ```json
-{
-  "username": "wildme_ess",
-  "OTP_Token": "XXXXXX",
-  "long_term_days": 300
-}
+   {
+     "username": "wildme_ess",
+     "OTP_Token": "XXXXXX",
+     "long_term_days": 300
+   }
   ```
 - **Response**:
   ```json
@@ -130,7 +130,7 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Body**:
   ```json
   {
-    "collection_name": "miewid_2152",
+    "algorithm": "miewid_2152",
     "query_vector": [0.1, 0.2, 0.3, 0.4, 0.5],
     "top_k": 5
   }
@@ -161,9 +161,9 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
 - **Body**:
   ```json
- {
-      "algorithm": "miewid_2152"
- }
+    {
+         "algorithm": "miewid_2152"
+    }
   ```
 - **Response**:
   ```json
@@ -184,10 +184,10 @@ This project provides a set of microservices to interact with a Qdrant vector da
 - **Description**: Retrieves all UUIDs from the specified Qdrant collection.
 - **Body**:
   ```json
-{
-    "uuids":["a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041","c2779b76-8418-4d91-bb42-cf47fb5bb6da"],
-    "algorithm": "miewid_2152"
-}
+   {
+       "uuids":["a7b3c2d8-90f0-4d1a-a62c-bb72f3ac5041","c2779b76-8418-4d91-bb42-cf47fb5bb6da"],
+       "algorithm": "miewid_2152"
+   }
   ```
 - **Response**:
   ```json
