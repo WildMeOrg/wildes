@@ -11,42 +11,12 @@ services:
       - 6333:6333
       - 6334:6334
 
-  embed_service:
-    image: wildme/wbia:nightly
-    command: --https --container-name embed_service --engine-fast-lane-workers 1 --engine-slow-lane-workers 1 --pie-v2 --pie --miew-id
-    volumes:
-      - /dataA/experiments/tamil.subramanian/data/embed_services:/data/db
-      - /dataA/experiments/tamil.subramanian/data:/data/wess
-      - /data/cache:/cache
-      - /dataA/experiments/tamil.subramanian/docker/vconfig:/v_config  
-    ports:
-      - 6018:5000
-      - 6444:6444
-      - 6445:6445
-      - 8887:8887
-    environment:
-      HOST_UID: "${HOST_UID}"
-      HOST_USER: "${HOST_USER}"
-      WBIA_SENTRY_DSN: "${WBIA_SENTRY_DSN}"
-    restart: unless-stopped
-    shm_size: '32g'
-    depends_on:
-      - qdrant  # Ensures Qdrant starts first
-      - git_setup  # Ensures the Python service is ready before running
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              device_ids: ['3']
-              capabilities: [gpu]
-
   git_setup:
-    image: python:3.10
-    container_name: wess_service
+    image: alpine/git  # Lightweight Git container
+    container_name: git_clone_service
     volumes:
       - /dataA/experiments/tamil.subramanian/data:/data
-    working_dir: /data/wess
+    working_dir: /data
     entrypoint: >
       sh -c "
       if [ ! -d /data/wess/.git ]; then
@@ -54,8 +24,30 @@ services:
       else
         cd /data/wess && git pull origin main;
       fi
+      "
+
+  embed_service:
+    image: python:3.10
+    container_name: wess_service
+    env_file:
+      - .env  # Loads environment variables
+    volumes:
+      - /dataA/experiments/tamil.subramanian/data:/data
+    working_dir: /data/wess
+    entrypoint: >
+      sh -c "
+      export QDRANT_HOST=${QDRANT_HOST}
+      export QDRANT_PORT=${QDRANT_PORT}
+      export API_KEY=${API_KEY}
       pip install -r /data/wess/requirements.txt &&
       nohup python3.10 -m uvicorn main:app --host 0.0.0.0 --port 6444 --reload &
       "
     depends_on:
-      - qdrant  # Qdrant starts before this service
+      - qdrant
+      - git_setup
+    ports:
+      - 6018:5000
+      - 6444:6444
+      - 6445:6445
+      - 8887:8887
+    restart: unless-stopped
